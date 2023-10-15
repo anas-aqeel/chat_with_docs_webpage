@@ -1,7 +1,9 @@
 from read_webpage import read_webpage
 from createFile import create_file
 from filterLinks import filterLinks
-from savedata import save_text_to_txt
+from savedata import save_text_to_md_file
+from get_vectorstore import get_vectorstore
+from dataSplitter import split_file_data
 
 links = set()
 markdowns = []
@@ -18,6 +20,11 @@ print("Filtering links...")
 validLinks = filterLinks(links)
 
 print(f"Saving data to '{output_filename}'...")
-
-save_text_to_txt("""
+save_text_to_md_file("""
 """.join(markdowns), output_filename)
+
+print("Splitting data into chunks...")
+chunks = split_file_data(output_filename)
+
+vectorStore = get_vectorstore(chunks=chunks)
+

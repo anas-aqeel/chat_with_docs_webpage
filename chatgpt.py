@@ -1,18 +1,10 @@
 from langchain.text_splitter import MarkdownHeaderTextSplitter
-import os
-import chromadb
 from langchain.vectorstores.chroma import Chroma
 from langchain.embeddings import HuggingFaceEmbeddings
-from langchain.document_transformers import (
-    LongContextReorder,
-)
-import json
-from langchain.chains import StuffDocumentsChain, LLMChain
-from langchain.prompts import PromptTemplate
-from langchain.llms import OpenAI
+
 
 # Get embeddings.
-embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-Lllm6-v2")
+embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 
 headers_to_split_on = [
     ("#", "Header 1"),
@@ -23,7 +15,7 @@ headers_to_split_on = [
 
 markdown_splitter = MarkdownHeaderTextSplitter(headers_to_split_on=headers_to_split_on)
 
-with open('data.md', 'r', encoding='utf-8') as f:
+with open('data/data.md', 'r', encoding='utf-8') as f:
     markdown_document = f.read()
     md_header_splits = markdown_splitter.split_text(markdown_document)
 

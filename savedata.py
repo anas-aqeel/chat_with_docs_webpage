@@ -3,7 +3,7 @@ import pdfkit
 
 
 
-def save_text_to_txt(text, output_filename):
+def save_text_to_md_file(text, output_filename):
     try:
         with open(output_filename, 'w', encoding='utf-8') as file:
             file.write(text)
